@@ -51,7 +51,8 @@ const app = {
     desc: document.querySelector('.planet__desc'),
     desc: document.querySelector('.planet__desc'),
     detail_container: document.querySelector('.planet__details'),
-    moons_content: document.querySelector('.moons__content'),
+    others_title: document.querySelector('.others__title'),
+    others_content: document.querySelector('.others__content'),
   },
 
   getKey: async function () {
@@ -73,9 +74,15 @@ const app = {
     console.log(data)
     return data.bodies
   },
+  toggleModal: function () {
+    this.elements.modal.classList.add('active')
+    this.elements.modal_overlay.addEventListener('click', () => {
+      this.elements.modal.classList.remove('active')
+    })
+  },
 
   handleSelectedPlanet: function (body, bodyIndex) {
-    this.handleModal()
+    this.toggleModal()
 
     const selected_planet_color = this.variables.planet_colors[bodyIndex].color
 
@@ -87,17 +94,17 @@ const app = {
     //detail
     this.displayDetail(body)
 
-    // moons
-    this.elements.moons_content.innerHTML = body.moons.join(', ')
+    // other info
+    this.displayOtherInfo(body)
   },
 
-  handleModal: function () {
-    this.elements.modal.classList.add('active')
-    this.elements.modal_overlay.addEventListener('click', () => {
-      this.elements.modal.classList.remove('active')
-    })
+  // denna funktion visar innehåll till heading av den planet man valde
+  displayHeading: function (body, selected_planet_color) {
+    this.elements.rubric.innerHTML = body.name
+    this.elements.sub_rubric.style.color = selected_planet_color
+    this.elements.sub_rubric.innerHTML = body.latinName
+    this.elements.desc.innerHTML = body.desc
   },
-
   // denna funktion visar 4 detaljer :circumference,distance, temp on day, temp on night. Jag giorde så här eftersom jag vill funktionen handleSelectedPlanet ska bli lättare att förstår.
   displayDetail: function (body) {
     const detailsArray = [
@@ -118,26 +125,26 @@ const app = {
         content: body.temp.night,
       },
     ]
-    console.log(detailsArray)
     const result = detailsArray.map(
       (detail) => `
-    <section class="detail">
-            <b class="detail__title">${detail.title}</b>
-            <p class="detail__content">${detail.content}</p>
-          </section>
-    `
+  <section class="detail">
+          <b class="detail__title">${detail.title}</b>
+          <p class="detail__content">${detail.content}</p>
+        </section>
+  `
     )
     this.elements.detail_container.innerHTML = result.join('')
   },
-
-  // denna funktion visar innehåll till heading av den planet man valde
-  displayHeading: function (body, selected_planet_color) {
-    this.elements.rubric.innerHTML = body.name
-    this.elements.sub_rubric.style.color = selected_planet_color
-    this.elements.sub_rubric.innerHTML = body.latinName
-    this.elements.desc.innerHTML = body.desc
+  // denna funktion visar andra information bland annat månar eller rotation
+  displayOtherInfo: function (body) {
+    if (body.moons.length > 0) {
+      this.elements.others_title.innerHTML = 'Månar'
+      this.elements.others_content.innerHTML = body.moons.join(', ')
+    } else {
+      this.elements.others_title.innerHTML = 'Rotation'
+      this.elements.others_content.innerHTML = body.rotation
+    }
   },
-
   // denna funktion stylar för sol sjärna genom att sätt class 'sun' på
   styleForSunStar: function (spanElement) {
     spanElement.classList.add('sun')

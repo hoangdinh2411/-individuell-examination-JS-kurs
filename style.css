@@ -135,7 +135,7 @@ span {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .detail__title,
-.moons__title {
+.others__title {
   font-family: 'Secular One';
   font-weight: 400;
   letter-spacing: 1px;
@@ -144,7 +144,7 @@ span {
 }
 
 .detail__content,
-.moons__content {
+.others__content {
   font-family: 'Roboto Condensed';
   font-weight: 300;
   font-size: 18px;
@@ -153,6 +153,6 @@ span {
   opacity: 0.8;
   margin-top: 8px;
 }
-.moons {
+.others {
   padding: 32px 0;
 }
