@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto+Condensed:wght@300;400;700&family=Secular+One&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #0c164d 0%, #190b22 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding-left: 150px;
+  padding-right: 70px;
+}
+
+span {
+  margin: auto;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sun {
+  position: absolute;
+  width: 600px;
+  height: 800px;
+  transform: translateX(-110%);
+  background-color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+  background: linear-gradient(90deg, #0c164d 0%, #190b22 100%);
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal.active .modal__overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.modal.active .modal__body {
+  transform: translateY(0);
+}
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/stars.png');
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal__body {
+  position: relative;
+  transform: translateY(300%);
+  transition: all 0.2s ease;
+  z-index: 10;
+  width: 640px;
+  background: transparent;
+  height: 100%;
+  padding: 100px 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.modal__body::-webkit-scrollbar {
+  display: none;
+}
+.selected-planet {
+  position: absolute;
+  width: 600px;
+  height: 800px;
+  transform: translateX(-150%);
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.planet__rubric {
+  font-family: 'Secular One';
+  font-weight: 400;
+  font-size: 60px;
+  letter-spacing: 0.9px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.planet__sub-rubric {
+  font-family: 'Lora';
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.planet__desc {
+  font-family: 'Roboto Condensed';
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 170%;
+  color: #ffffff;
+  padding: 32px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.planet__details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  padding: 32px 0;
+  gap: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.detail__title,
+.moons__title {
+  font-family: 'Secular One';
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.detail__content,
+.moons__content {
+  font-family: 'Roboto Condensed';
+  font-weight: 300;
+  font-size: 18px;
+  color: #ffffff;
+  letter-spacing: 1.6px;
+  opacity: 0.8;
+  margin-top: 8px;
+}
+.moons {
+  padding: 32px 0;
+}
