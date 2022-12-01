@@ -44,6 +44,7 @@ const app = {
   elements: {
     wrapper: document.querySelector('.wrapper'),
     modal: document.querySelector('.modal'),
+    modal_body: document.querySelector('.modal__body'),
     modal_overlay: document.querySelector('.modal__overlay'),
     selected_planet: document.querySelector('.selected-planet'),
     rubric: document.querySelector('.planet__rubric'),
@@ -76,8 +77,10 @@ const app = {
   },
   toggleModal: function () {
     this.elements.modal.classList.add('active')
+
     this.elements.modal_overlay.addEventListener('click', () => {
       this.elements.modal.classList.remove('active')
+      this.elements.modal_body.scrollTop = 0
     })
   },
 
@@ -127,7 +130,7 @@ const app = {
     ]
     const result = detailsArray.map(
       (detail) => `
-  <section class="detail">
+        <section class="detail">
           <b class="detail__title">${detail.title}</b>
           <p class="detail__content">${detail.content}</p>
         </section>
@@ -137,13 +140,10 @@ const app = {
   },
   // denna funktion visar andra information bland annat månar eller rotation
   displayOtherInfo: function (body) {
-    if (body.moons.length > 0) {
-      this.elements.others_title.innerHTML = 'Månar'
-      this.elements.others_content.innerHTML = body.moons.join(', ')
-    } else {
-      this.elements.others_title.innerHTML = 'Rotation'
-      this.elements.others_content.innerHTML = body.rotation
-    }
+    this.elements.others_title.innerHTML =
+      body.moons.length > 0 ? 'Månar' : 'Rotation'
+    this.elements.others_content.innerHTML =
+      body.moons.length > 0 ? body.moons.join(', ') : body.rotation
   },
   // denna funktion stylar för sol sjärna genom att sätt class 'sun' på
   styleForSunStar: function (spanElement) {
